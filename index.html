@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11191d">
+  <meta name="description" content="Explora el entorno alimentario de 22 escuelas de Barcelona: oferta, promoción y peso escolar en la tesis de Catalina Londoño Cañola.">
+  <title>Catamap · Entornos alimentarios escolares</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script defer src="data/clean/bundle.js"></script>
+  <script defer src="src/config.js"></script>
+  <script defer src="src/map-helpers.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#filters">Saltar a los filtros</a>
+  <header class="header">
+    <a class="brand" href="./" aria-label="Catamap, inicio"><span class="brand-icon">◉</span> cata<span>map</span><span class="brand-dot">.</span></a>
+    <div class="header-title">ENTORNOS ALIMENTARIOS ESCOLARES <span>Barcelona · 2019–2020</span></div>
+    <button class="text-button" id="about-button">Sobre el estudio <span aria-hidden="true">↗</span></button>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Exploración del estudio">
+      <div class="sidebar-scroll">
+        <div class="eyebrow"><span class="live-dot"></span> ATLAS DE LA TESIS</div>
+        <h1>El entorno, <br>a pie de escuela.</h1>
+        <p class="intro">Explora qué se ofrece y qué se promociona alrededor de las escuelas.</p>
+        <div class="stats" id="stats" aria-live="polite"></div>
+        <button class="mobile-toggle text-button" id="filters-toggle" aria-expanded="false" aria-controls="filters">Filtros y escuelas <span>⌄</span></button>
+        <div id="filters" class="filters">
+          <div class="section-heading"><h2>Acota el mapa</h2><button class="subtle-button" id="reset">Restablecer</button></div>
+          <label for="school">Escuela</label>
+          <select id="school"><option value="">Las 22 escuelas</option></select>
+          <div class="filter-row">
+            <div><label for="district">Distrito de la escuela</label><select id="district"><option value="">Todos</option></select></div>
+            <div><label for="sector">Tipo de local</label><select id="sector"><option value="">Todos</option><option value="food_retail">🛒 Comercio</option><option value="food_service">🍽️ Restauración</option></select></div>
+          </div>
+          <label for="result">Resultado observado</label>
+          <select id="result"></select>
+          <label for="context">Fondo por barrios</label>
+          <select id="context"><option value="none">Sin indicador</option><option value="rfd">Renta familiar · índice 2016</option><option value="density">Densidad de población · 2016</option></select>
+          <label class="check"><input type="checkbox" id="buffers"> Círculos de 400 m en la vista general</label>
+          <div class="coverage-note" id="coverage"></div>
+          <div class="section-heading schools-heading"><h2 id="school-list-title">Explora las escuelas</h2><span id="school-list-count" class="muted"></span></div>
+          <div id="school-list" class="school-list"></div>
+          <button class="download-button" id="download">↓ Descargar selección CSV</button>
+        </div>
+        <p class="sidebar-foot">Catalina Londoño Cañola · Tesis doctoral, UPF, 2023<br>Una mirada a datos históricos del estudio.</p>
+      </div>
+    </aside>
+    <section class="map-shell" aria-label="Mapa interactivo de Barcelona">
+      <div id="map" aria-label="Escuelas y establecimientos del estudio"></div>
+      <div class="map-toolbar">
+        <div class="view-tabs" role="group" aria-label="Vista del mapa">
+          <button data-view="promotion" aria-pressed="true">📣 <span>Promoción</span></button>
+          <button data-view="nutrition" aria-pressed="false">🥬 <span>Oferta</span></button>
+          <button data-view="schools" aria-pressed="false">🏫 <span>Escuelas</span></button>
+          <button data-view="all" aria-pressed="false">🏪 <span>Todos los locales</span></button>
+        </div>
+        <button id="compare-button" class="compare-button">↗ Comparar escuelas</button>
+      </div>
+      <div class="map-caption" id="map-caption"></div>
+      <button class="fit-button" id="fit" aria-label="Ajustar el mapa a la selección" title="Ajustar a la selección">⌖</button>
+      <div class="legend" id="legend"></div>
+      <div id="detail" class="detail" hidden aria-label="Ficha de la selección" tabindex="-1"></div>
+      <div id="error" class="error" hidden role="alert"></div>
+    </section>
+  </main>
+  <dialog id="about-dialog" class="modal">
+    <div class="modal-top"><span class="eyebrow">DEL DOCUMENTO AL TERRITORIO</span><button class="close" data-close="about-dialog" aria-label="Cerrar información">×</button></div>
+    <h2>¿Cómo influye el entorno alimentario?</h2>
+    <p>La tesis de <strong>Catalina Londoño Cañola</strong> estudia la relación entre la oferta y la promoción de alimentos alrededor de 22 escuelas de Barcelona y el peso escolar.</p>
+    <div class="hypotheses">
+      <h3>Las hipótesis que puedes explorar</h3>
+      <p><b>01 · Densidad.</b> Más locales alimentarios en entornos densamente poblados y de menor nivel socioeconómico.</p>
+      <p><b>02 · Oferta.</b> Menos opciones saludables en entornos de baja densidad y menor nivel socioeconómico.</p>
+      <p><b>03 · Proximidad.</b> Relación entre obesidad y cercanía a locales con menor disponibilidad de opciones saludables.</p>
+      <p><b>04 · Promoción.</b> Mayor presencia de promoción de alimentos calóricos en entornos de menor nivel socioeconómico.</p>
+      <p><b>05 · Exposición.</b> Asociación entre promoción y obesidad, especialmente en entornos de menor nivel socioeconómico.</p>
+    </div>
+    <h3>Cómo leer las capas</h3>
+    <p><strong>Promoción (PEADC, 0–40):</strong> 306 locales observados. Una puntuación mayor indica más promoción de alimentos de alta densidad calórica. El cero es un resultado válido.</p>
+    <p><strong>Oferta (IDAS/NEMS, 0–49):</strong> 153 comercios evaluados por disponibilidad y precio. Una puntuación mayor indica mejor oferta. La clasificación publicada sitúa 146 como no saludables y 7 como saludables; no evalúa la higiene del local. Un caso de 36 puntos discrepa del umbral escrito.</p>
+    <p><strong>Escuelas:</strong> prevalencias agregadas de obesidad. El exceso de peso incluye sobrepeso y obesidad; se enlaza a las escuelas por distrito y media PEADC porque la tabla publicada está anonimizada. Dos filas discrepan en titularidad.</p>
+    <p><strong>Territorio:</strong> renta y población de 2016 disponibles en 40 de los 73 barrios. Los círculos de 400 m se reconstruyen con coordenadas oficiales del curso 2019–2020; conservamos la asignación original de cada local.</p>
+    <div class="method-note">Trabajo de campo 2019–2020 · Base final de diciembre de 2022. La muestra es de conveniencia y el estudio es transversal: explora asociaciones, sin demostrar causalidad ni representar a toda Barcelona. No hay datos individuales de alumnado.</div>
+    <p class="sources"><a href="DATA_SOURCES.md" target="_blank" rel="noopener">Procedencia y limpieza de datos ↗</a> · <a href="https://analisi.transparenciacatalunya.cat/Educaci-/Directori-de-centres-docents-evoluci-/e2ef-eiqj" target="_blank" rel="noopener">Directorio histórico de centros ↗</a></p>
+  </dialog>
+  <dialog id="compare-dialog" class="modal comparison">
+    <div class="modal-top"><span class="eyebrow">22 ENTORNOS ESCOLARES</span><button class="close" data-close="compare-dialog" aria-label="Cerrar comparación">×</button></div>
+    <h2>Promoción y peso escolar</h2>
+    <p>Cada punto es una escuela. La media PEADC incluye los locales con cero puntos. Selecciona un punto para explorar su entorno.</p>
+    <div id="comparison-chart"></div>
+    <p class="method-note">Relación descriptiva entre medias del entorno y prevalencias agregadas. Los puntos no representan tamaños de cohorte ni permiten atribuir efectos causales.</p>
+  </dialog>
+  <noscript>Activa JavaScript para explorar el mapa interactivo.</noscript>
+</body>
+</html>

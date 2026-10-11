@@ -1,0 +1,23 @@
+table_row,district_id,reported_school_type,excess_weight_prevalence_pct,mean_peadc_reported,pdf_page,printed_page,school_id,school_name,school_type_from_stata,mean_peadc_reproduced,school_type_conflict,link_reconstructed
+1,1,public,16.6,12.76,118,94,EG8213879,Escola Mediterrània,public,12.769231,False,True
+2,1,subsidized,41.6,10.83,118,94,EG8208259,Centre Educatiu Vedruna Àngels,subsidized,10.830189,False,True
+3,2,public,23.0,11.88,118,94,EG8220769,Escola Ramon Llull,public,11.882353,False,True
+4,2,subsidized,46.7,17.16,118,94,EG8220582,Centre Educatiu Mare del Diví Pastor,subsidized,17.166667,False,True
+5,3,public,0.01,11.0,118,94,EG8213809,Escola Tres Pins,public,11.0,False,True
+6,3,subsidized,46.7,14.66,118,94,EG8206962,Centre Educatiu Alfageme,subsidized,14.666667,False,True
+7,4,public,19.1,16.0,118,94,EG8212938,Escola les Corts,public,16.0,False,True
+8,4,subsidized,29.6,14.0,118,94,EG8207026,Centre Educatiu Sant Ramon Nonat-Sagrat Cor,subsidized,14.0,False,True
+9,5,public,22.7,10.3,118,94,EG8217169,Escola Orlandai,public,10.3,False,True
+10,5,subsidized,17.2,30.0,118,94,EG8217161,Centre Educatiu Padre Damián Sagrados Corazones,subsidized,30.0,False,True
+11,6,public,8.6,10.76,118,94,EG8219165,Escola Pau Casals-Gràcia,public,10.761905,False,True
+12,6,subsidized,43.5,12.15,118,94,EG8215200,Centre Educatiu Sant Josep,subsidized,12.159091,False,True
+13,7,public,16.0,13.14,118,94,EG8217781,Escola El Carmel,public,13.142857,False,True
+14,7,subsidized,50.0,23.28,118,94,EG8209314,Escola Mas Casanovas,public,23.285714,True,True
+15,7,public,12.5,12.5,118,94,EG8217317,Centre Educatiu Sant Joan Bosco,subsidized,12.5,True,True
+16,7,subsidized,27.3,12.55,118,94,EG8221233,Centre Educatiu Immaculada Concepció *Granollers,subsidized,12.555556,False,True
+17,8,public,13.6,7.9,118,94,EG8211392,Escola Àgora,public,7.9,False,True
+18,8,subsidized,47.1,13.66,118,94,EG8211404,Centre Educatiu Mare Alfonsa Cavín,subsidized,13.666667,False,True
+19,9,public,28.5,18.2,118,94,EG8207513,Escola Ramón y Cajal,public,18.2,False,True
+20,9,subsidized,16.1,15.87,118,94,EG8219368,Centre Educatiu Sagrada Família *Arquímedes,subsidized,15.875,False,True
+21,10,public,47.3,18.71,118,94,EG8213457,Escola Prim,public,18.714286,False,True
+22,10,subsidized,18.2,20.18,118,94,EG8219458,Centre Educatiu Adela de Trenquelleón,subsidized,20.181818,False,True

@@ -1,0 +1,45 @@
+{
+  "census_2016_thesis_subset.csv": {
+    "publisher": "Ajuntament de Barcelona",
+    "reference_year": 2016,
+    "portal": "https://datos.gob.es/es/catalogo/l01080193-censo-locales-en-planta-baja-destinados-a-actividad-economica-de-la-ciudad-de-barcelona",
+    "official_download_url": "https://opendata-ajuntament.barcelona.cat/data/dataset/fe177673-0f83-42e7-b35a-ddea901be8bc/resource/e6e7610c-f35a-430f-8527-de0945a1fd96/download",
+    "retrieval_url": "https://raw.githubusercontent.com/Artagok/HotSpots/2e5809049f53fe53f386cecb56827976398705f1/API/fetcher/data/2016_cens_locals_plantabaixa.csv",
+    "retrieval_method": "pinned mirror; official portal timed out",
+    "upstream_sha256": "785c391c0c0b6165e645ff39b2173c8718cf4d6dbb0702036035f6cd91c3f19a",
+    "upstream_bytes": 20825221,
+    "upstream_rows": 78033,
+    "retained_rows": 3639,
+    "selection": "ID_BCN in thesis 2022 id_bcn; geographic enrichment only",
+    "validation": "all 305 overlapping Excel/census coordinates exactly equal",
+    "license": "CC BY 4.0; Ajuntament de Barcelona",
+    "snapshot_sha256": "1287d471eaa81e6f89b44921e2f78e2d351d3a58b4330a00dddb0530cdfa4971",
+    "access_date": "2026-10-11"
+  },
+  "schools_directory_2019_2020.json": {
+    "publisher": "Generalitat de Catalunya",
+    "reference_period": "2019/2020",
+    "portal": "https://analisi.transparenciacatalunya.cat/d/e2ef-eiqj",
+    "retrieval_url": "https://analisi.transparenciacatalunya.cat/resource/e2ef-eiqj.json?$limit=50000",
+    "upstream_rows": 43493,
+    "upstream_sha256": "c40a27a521d087452ad54ef39398ba80641fb036332a3d6a042fbf11ce04a886",
+    "retained_rows": 22,
+    "selection": "curs=2019/2020, Barcelona, explicit school crosswalk; geographic enrichment only",
+    "license_url": "https://administraciodigital.gencat.cat/ca/dades/dades-obertes/informacio-practica/llicencies/",
+    "snapshot_sha256": "af43e4ef241316c6e66f71f3600cf4841eaacc737bba4a6be791a04adb80212b",
+    "access_date": "2026-10-11"
+  },
+  "barris.geojson": {
+    "publisher": "Ajuntament de Barcelona / CartoBCN",
+    "retrieval_method": "unchanged local snapshot from reference project quirat-barcelona",
+    "reference_project": "/Users/marc/Documents/Projects/quirat-barcelona/data/barris.geojson",
+    "upstream_url": "https://raw.githubusercontent.com/martgnz/bcn-geodata/master/barris/barris.geojson",
+    "reference_project_download_date": "2026-06-25",
+    "reference_year": null,
+    "retained_rows": 73,
+    "license": "CC BY; Ajuntament de Barcelona / CartoBCN",
+    "use": "background administrative geometry; not asserted to be the original thesis GIS layer",
+    "snapshot_sha256": "4fe69538d6e1f91dc85df875c9dcbd8e2e8fc52e0240f67c2b4ebd261d117c69",
+    "access_date": "2026-10-11"
+  }
+}
