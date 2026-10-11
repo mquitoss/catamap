@@ -36,25 +36,60 @@ muestra las 22 escuelas y permite abrir sus fichas.
 
 ## Desplegar en Cloudflare
 
-```bash
-npm run check:deploy
-npm run deploy
-```
+Se utiliza **Workers Static Assets + Workers Builds**, conectado directamente
+con GitHub, igual que en `valhalla-committee`. `main` publica producción y las
+otras ramas generan previews independientes. Wrangler sigue fijado a `4.149.0`.
 
-La primera instrucción construye `dist/` y comprueba el paquete sin publicarlo.
-La segunda publica el Worker **catamap** en la cuenta de Cloudflare que autentique
-Wrangler. Para iniciar sesión, utiliza `npx wrangler login` en tu equipo si es
-necesario. No introduzcas credenciales en los archivos del proyecto.
+### Conectar GitHub a Workers Builds
+
+En Cloudflare, importa `mquitoss/catamap` y configura:
+
+| Ajuste | Valor |
+|---|---|
+| Nombre del Worker | `catamap` |
+| Directorio raíz | Raíz del repositorio (`/`) |
+| Rama de producción | `main` |
+| Build command | `npm test && npm run check:deploy` |
+| Deploy command | `npm run deploy` |
+| Preview command | `npm run preview:deploy` |
+| Preview Builds | Activadas para las demás ramas |
+
+`.node-version` fija Node.js `22.23.2`; Cloudflare instala las dependencias del
+lockfile automáticamente. El build comprueba los tests, genera `dist/` y valida
+el paquete antes de publicar. Los comandos de producción y preview ejecutan
+Wrangler sobre el resultado ya construido.
+
+La cuenta y la conexión de la aplicación oficial de GitHub se seleccionan en
+Cloudflare. Usa el token administrado por Workers Builds; este método no exige
+un secreto de despliegue en GitHub Actions. El workflow alternativo de Actions
+se ha retirado para que haya un único sistema de publicación.
+
+Los pasos completos, las referencias oficiales y la comprobación del primer
+build están en [`docs/cloudflare.md`](docs/cloudflare.md). Estos archivos preparan
+el proyecto; la conexión del repositorio y el primer despliegue remoto deben
+completarse en Cloudflare después de subir los cambios a GitHub.
 
 [`wrangler.jsonc`](wrangler.jsonc) apunta exclusivamente a `dist/`. La construcción
 copia una lista explícita de archivos: aplicación, bundle limpio y documentación
 de fuentes. No incluye PDF, Stata, Excel ni snapshots originales. No requiere
-backend, base de datos, bindings ni código de servidor.
+backend, base de datos, bindings ni código de servidor. `previews: {}` habilita
+la configuración de previews sin recursos ni credenciales de producción.
 
-También puedes conectar el repositorio a **Workers Builds** en Cloudflare:
-instalación `npm ci`, construcción `npm run build`, despliegue `npx wrangler deploy`.
-El dominio personalizado se configura en el Worker tras publicarlo.
-Consulta la [guía oficial de sitios estáticos](https://developers.cloudflare.com/workers/static-assets/get-started/).
+### Despliegue desde tu equipo
+
+```bash
+npm run check:deploy
+npm run deploy:local
+```
+
+La primera instrucción construye y comprueba el paquete sin publicar. La
+segunda vuelve a construir y publica el Worker **catamap** en la cuenta que
+Wrangler autentique. Para iniciar sesión, utiliza `npx wrangler login` si es
+necesario. No introduzcas credenciales en los archivos del proyecto.
+
+`npm run deploy` y `npm run preview:deploy` esperan que `dist/` ya esté construido,
+como en Valhalla y en Workers Builds. El dominio personalizado se configura en
+el Worker tras publicarlo.
 
 ### Fondo cartográfico
 

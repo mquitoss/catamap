@@ -8,7 +8,9 @@
     "dev": "npm run build && wrangler dev",
     "test": "vitest run",
     "check:deploy": "npm run build && wrangler deploy --dry-run",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "wrangler deploy",
+    "preview:deploy": "wrangler preview",
+    "deploy:local": "npm run build && npm run deploy"
   },
   "devDependencies": {
     "vitest": "2.1.9",
