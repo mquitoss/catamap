@@ -65,9 +65,9 @@ un secreto de despliegue en GitHub Actions. El workflow alternativo de Actions
 se ha retirado para que haya un único sistema de publicación.
 
 Los pasos completos, las referencias oficiales y la comprobación del primer
-build están en [`docs/cloudflare.md`](docs/cloudflare.md). Estos archivos preparan
-el proyecto; la conexión del repositorio y el primer despliegue remoto deben
-completarse en Cloudflare después de subir los cambios a GitHub.
+build están en [`docs/cloudflare.md`](docs/cloudflare.md). El repositorio ya está
+conectado a Workers Builds y el primer despliegue ha finalizado correctamente.
+La URL de producción es <https://catamap.marc-freixas.workers.dev/>.
 
 [`wrangler.jsonc`](wrangler.jsonc) apunta exclusivamente a `dist/`. La construcción
 copia una lista explícita de archivos: aplicación, bundle limpio y documentación

@@ -6,9 +6,20 @@ oficial **Cloudflare Workers and Pages**. Sus checks de producción y preview
 constan como exitosos. Su `wrangler.jsonc` incluye `previews: {}` y separa
 los comandos de construcción, producción y preview.
 
-Catamap está preparado para ese mismo alojamiento y para las previews. La
-conexión del repositorio se configura en Cloudflare; escribir `wrangler.jsonc`
-no crea por sí solo esa conexión.
+Catamap utiliza ese mismo alojamiento y está conectado a GitHub. La conexión
+del repositorio se configura en Cloudflare; escribir `wrangler.jsonc` no crea
+por sí solo esa conexión.
+
+## Estado del despliegue
+
+Configurado el 11 de octubre de 2026 en la cuenta que aloja Valhalla:
+
+- Producción: <https://catamap.marc-freixas.workers.dev/>.
+- Repositorio conectado: `mquitoss/catamap`, rama `main`.
+- Primer build de producción exitoso: `d3d1c212-8b96-48f0-8f6f-8c941fc05edc`.
+- Aplicación oficial de GitHub autorizada específicamente para Catamap.
+- Token de build existente: `valhalla-committee build token`.
+- `workers_dev: true` conserva la URL pública en futuros despliegues.
 
 ## Ajustes para Workers Builds
 
